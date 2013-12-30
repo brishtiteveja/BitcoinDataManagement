@@ -531,32 +531,32 @@ void runExtractor(){
 	}
 
 	//determine user id
-	if(userID != 0){ //Only generation user
-		for(int addr = 1; addr <= addrID;addr++){ // addresses are the keys of the multimap
-				typeof(addrUserMap.begin()) it = addrUserMap.equal_range(addr);
-				int userid = (*it).second;
-				cout << "addr = " << addr << " user id before smallest = " << userid << endl;
-				//find what other user ids given to this address id
-				for(it = addrUserMap.equal_range(addr).first; it != addrUserMap.equal_range(addr).second; it++){
-					cout << "addr =" << it->first << "Other user ids = " << it->second << endl;
-					if(it->second < userid){
-						userid = it->second; // find the smallest
-					}
-				}
-				cout << "smallest userid = " << userid << endl;
-				for(it = addrUserMap.equal_range(addr).first; it != addrUserMap.equal_range(addr).second; it++){
-					int user_id = it->second;
-					cout << "addr = " << addr << "user id as the key: " << user_id << endl;
-					//find out what other addresses have that user_id as the key in the userAddr multimap and set userid
-					for(typeof(userAddrMap.begin()) it1 = userAddrMap.equal_range(user_id).first;
-						it1 != userAddrMap.equal_range(user_id).second; it1++){
-						cout << "address to map =" << it1->second << endl;
-						userMap[it1->second] = userid;
-						cout << "userMap[" << it1->second << "] = " << userid << endl;
-					}
-				}
-		}
-	}
+//	if(userID != 0){ //Only generation user
+//		for(int addr = 1; addr <= addrID;addr++){ // addresses are the keys of the multimap
+//				mmii::iterator it = addrUserMap.equal_range(addr);
+//				int userid = (*it).second;
+//				cout << "addr = " << addr << " user id before smallest = " << userid << endl;
+//				//find what other user ids given to this address id
+//				for(it = addrUserMap.equal_range(addr).first; it != addrUserMap.equal_range(addr).second; it++){
+//					cout << "addr =" << it->first << "Other user ids = " << it->second << endl;
+//					if(it->second < userid){
+//						userid = it->second; // find the smallest
+//					}
+//				}
+//				cout << "smallest userid = " << userid << endl;
+//				for(it = addrUserMap.equal_range(addr).first; it != addrUserMap.equal_range(addr).second; it++){
+//					int user_id = it->second;
+//					cout << "addr = " << addr << "user id as the key: " << user_id << endl;
+//					//find out what other addresses have that user_id as the key in the userAddr multimap and set userid
+//					for(typeof(userAddrMap.begin()) it1 = userAddrMap.equal_range(user_id).first;
+//						it1 != userAddrMap.equal_range(user_id).second; it1++){
+//						cout << "address to map =" << it1->second << endl;
+//						userMap[it1->second] = userid;
+//						cout << "userMap[" << it1->second << "] = " << userid << endl;
+//					}
+//				}
+//		}
+//	}
 
 
 	//------>write to degree.txt
