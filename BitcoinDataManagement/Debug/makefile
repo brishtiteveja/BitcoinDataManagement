@@ -44,7 +44,7 @@ all: BitcoinDataManagement
 BitcoinDataManagement: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MacOS X C++ Linker'
-	g++ -L/Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boostMyBuild/lib -o "BitcoinDataManagement" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++  -o "BitcoinDataManagement" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
