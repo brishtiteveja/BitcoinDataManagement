@@ -10,7 +10,9 @@
 #include "CreateBitcoinGraph.h"
 #include "ComputeOverBitcoinData.h"
 #include "IdentifyBitcoinUser.h"
+#include "IdentifyBitcoinUserEfficient.h"
 #include "CommonHeaders.h"
+
 
 string MAC_PATH ="/Users/zehadyzbdullahkhan/Documents/workspace/Research/Thesis/Bitcoin/Bitcoin_Data/";
 string MAC_BITCOIN_PATH ="/Users/zehadyzbdullahkhan/Documents/workspace/Research/Thesis/Bitcoin/";
@@ -24,7 +26,8 @@ int main(){
 	//createGraph();
 	//runExtractor();
 	//compute();
-	IdentifyBitcoinUsers();
+	IdentifyBitcoinUserEfficient userContractor;
+	userContractor.identifyBitcoinUser();
 }
 
 

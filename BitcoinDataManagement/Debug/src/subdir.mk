@@ -9,6 +9,7 @@ CPP_SRCS += \
 ../src/CreateBitcoinGraph.cpp \
 ../src/ExtractFromBlockExplorer.cpp \
 ../src/IdentifyBitcoinUser.cpp \
+../src/IdentifyBitcoinUserEfficient.cpp \
 ../src/RichGetsRicher.cpp \
 ../src/main.cpp 
 
@@ -18,6 +19,7 @@ OBJS += \
 ./src/CreateBitcoinGraph.o \
 ./src/ExtractFromBlockExplorer.o \
 ./src/IdentifyBitcoinUser.o \
+./src/IdentifyBitcoinUserEfficient.o \
 ./src/RichGetsRicher.o \
 ./src/main.o 
 
@@ -27,6 +29,7 @@ CPP_DEPS += \
 ./src/CreateBitcoinGraph.d \
 ./src/ExtractFromBlockExplorer.d \
 ./src/IdentifyBitcoinUser.d \
+./src/IdentifyBitcoinUserEfficient.d \
 ./src/RichGetsRicher.d \
 ./src/main.d 
 

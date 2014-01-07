@@ -1,5 +1,6 @@
-src/main.d src/main.o: ../src/main.cpp ../src/RichGetsRicher.h \
-  ../src/ExtractFromBlockExplorer.h ../src/CommonHeaders.h \
+src/IdentifyBitcoinUserEfficient.d src/IdentifyBitcoinUserEfficient.o:  \
+ ../src/IdentifyBitcoinUserEfficient.cpp \
+  ../src/IdentifyBitcoinUserEfficient.h ../src/CommonHeaders.h \
   /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex.hpp \
   /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/config.hpp \
   /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/user.hpp \
@@ -246,13 +247,9 @@ src/main.d src/main.o: ../src/main.cpp ../src/RichGetsRicher.h \
   /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/v4/regex_grep.hpp \
   /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/v4/regex_replace.hpp \
   /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/v4/regex_merge.hpp \
-  /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/v4/regex_split.hpp \
-  ../src/CreateBitcoinGraph.h ../src/ComputeOverBitcoinData.h \
-  ../src/IdentifyBitcoinUser.h ../src/IdentifyBitcoinUserEfficient.h
+  /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/v4/regex_split.hpp
 
-../src/RichGetsRicher.h:
-
-../src/ExtractFromBlockExplorer.h:
+../src/IdentifyBitcoinUserEfficient.h:
 
 ../src/CommonHeaders.h:
 
@@ -749,11 +746,3 @@ src/main.d src/main.o: ../src/main.cpp ../src/RichGetsRicher.h \
 /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/v4/regex_merge.hpp:
 
 /Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0/boost/regex/v4/regex_split.hpp:
-
-../src/CreateBitcoinGraph.h:
-
-../src/ComputeOverBitcoinData.h:
-
-../src/IdentifyBitcoinUser.h:
-
-../src/IdentifyBitcoinUserEfficient.h:
