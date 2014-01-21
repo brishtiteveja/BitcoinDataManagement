@@ -37,15 +37,15 @@ CPP_DEPS += \
 # Each subdirectory must supply rules for building sources it contributes
 src/Bitcoin\ Data\ Management.o: ../src/Bitcoin\ Data\ Management.cpp
 	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I/Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Bitcoin Data Management.d" -MT"src/Bitcoin\ Data\ Management.d" -o "$@" "$<"
+	@echo 'Invoking: Cygwin C++ Compiler'
+	g++ -I"C:\Users\abdullah\Downloads\Libraries\boost_1_55_0\boost_1_55_0" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/Bitcoin Data Management.d" -MT"src/Bitcoin\ Data\ Management.d" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I/Users/zehadyzbdullahkhan/Documents/workspace/programming_language/C,C++/libraries/boost_1_53_0 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'Invoking: Cygwin C++ Compiler'
+	g++ -I"C:\Users\abdullah\Downloads\Libraries\boost_1_55_0\boost_1_55_0" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

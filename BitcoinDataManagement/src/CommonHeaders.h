@@ -12,6 +12,7 @@
 #include <iostream>
 #include <cstdio>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -19,7 +20,6 @@
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
-
 #include <boost/regex.hpp>
 
 
@@ -44,11 +44,13 @@ typedef map<int,double> mid;
 typedef multimap<int, int> mmii;
 typedef map<string,long int> msli;
 typedef map<long int,long int> mlili;
+typedef map<long int,double> mlid;
 typedef map<long int, pair<long int, long int> > miii;
 
 extern string MAC_PATH;
 extern string MAC_BITCOIN_PATH;
 extern string MAC_BLOCK_PATH;
 extern string WIN_PATH;
+extern string BITCOINPROCESSEDPATH;
 
 #define tr(C,it) for(typeof(C.begin()) it = C.begin(); it != C.end();it++)
