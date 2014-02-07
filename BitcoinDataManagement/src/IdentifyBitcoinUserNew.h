@@ -11,8 +11,12 @@
 #include "CommonHeaders.h"
 
 class IdentifyBitcoinUserNew {
+	//same user map
+	mlili userMap;
+	mlililist sameUMap;
 public:
 	void IdentifyBTCUser();
+	long int mergeUserID(long int u);
 };
 
 #endif /* IDENTIFYBITCOINUSERNEW_H_ */

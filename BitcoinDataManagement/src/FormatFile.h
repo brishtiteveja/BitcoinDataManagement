@@ -14,6 +14,18 @@ class FormatFile {
 public:
 	void formatAddressFile();
 	void formatTxOutFile();
+	string numToString(long int num);
+	int stringToInt(string s);
+	double stringToDouble(string s);
+	time_t convertToEpochtime(string realTime);
+	struct tm* convertToUnixtime(time_t epochTime);
+
+	FormatFile(){
+
+	};
+	~FormatFile(){
+
+	};
 };
 
 #endif /* FORMATFILE_H_ */

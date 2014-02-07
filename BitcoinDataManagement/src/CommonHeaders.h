@@ -14,6 +14,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <list>
 #include <map>
 #include <algorithm>
 #include <ctime>
@@ -21,7 +22,6 @@
 #include <cstring>
 #include <ctime>
 #include <boost/regex.hpp>
-
 
 using namespace std;
 using namespace boost;
@@ -37,14 +37,16 @@ typedef vector<iiii> viiii;
 typedef vector<long int> vli;
 typedef vector<si> vsi;
 typedef vector<string> vs;
+typedef vector<double> vd;
+typedef map<long int, list<long int> > mlililist;
 
 typedef map<string,int> msi;
 typedef map<int,int> mii;
 typedef map<int,double> mid;
+typedef map<long int,double> mlid;
 typedef multimap<int, int> mmii;
 typedef map<string,long int> msli;
 typedef map<long int,long int> mlili;
-typedef map<long int,double> mlid;
 typedef map<long int, pair<long int, long int> > miii;
 
 extern string MAC_PATH;

@@ -31,7 +31,6 @@ void IdentifyBitcoinUserEfficient::identifyBitcoinUser(){
 			tmp.txID = txInID;
 			tmp.addrID = addrID;
 			tmp.value = value;
-			tmp.r_flag = false;
 			AT.push_back(tmp);
 		}
 
@@ -58,103 +57,107 @@ void IdentifyBitcoinUserEfficient::identifyBitcoinUser(){
 //		}
 
 		//start user contraction
-		long int txInSize = AT.size();
-		for(long int r = 0; r < txInSize;r++){ 				// search through all the txs
-				vli addrStack;
-				if(AT[r].r_flag == false){
-					addrTXrep tmpTX = AT[r];
+//		long int txInSize = AT.size();
+
+		for(list<addrTXrep>::iterator it=AT.begin(); it != AT.end();it++){ 				// search through all the tx ins
+					vli addrStack;
+					addrTXrep tmpTX = *it;
 					long int currentTXID = tmpTX.txID;
 					current_user_id++;							//increase the user_id
 					cout << current_user_id << endl;
 
-					//Go through consecutive input txin
+					//Go through consecutive input txins
 					do{
-						AT[r].r_flag = true;					//row visited
-//						cout << "TXIN = " << AT[r].txID << " addrID = " << AT[r].addrID << " got Current User ID = " << current_user_id << endl;
+						cout << "TXIN = " << it->txID << " addrID = " << it->addrID << " got Current User ID = " << current_user_id << endl;
 						addrStack.push_back(tmpTX.addrID);		//push the address of the tx
 						userID[tmpTX.addrID] = current_user_id;
 						GotUserID[tmpTX.addrID] = true;
-						if(AT[r+1].txID == currentTXID){
-//							cout << "Next Address in the same Input TX." << endl;
-							r++;
-							tmpTX = AT[r];
+						it = AT.erase(it);
+						if(it->txID == currentTXID){
+							cout << "Next Address in the same Input TX." << endl;
+							tmpTX = *it;
 						}else{
 							break;
 						}
 					}while(tmpTX.txID == currentTXID);
 
-					for(long int s=r+1; s < txInSize; s++){  // search through all other input transactions
-		//				cout << "For IN TX: searching from pos " << s << endl;
-						if(AT[s].r_flag == false){
-							//cout << "TXIN found" << endl;
-							tmpTX = AT[s];
-							currentTXID = AT[s].txID;
+					for(list<addrTXrep>::iterator it2=it; it2 != AT.end();){  // search through all other input transactions
+		//					cout << "For IN TX: searching from pos " << s << endl;
+//							cout << "TXIN found" << endl;
+							tmpTX = *it2;
+							currentTXID = it2->txID;
 
-							long int txInStartPos = s;
+							list<addrTXrep>::iterator txInStartPos = it2;
 							int cnt = 0;
 							//Go through all the consecutive txin s' from s~ and see if at least one address matches with any one address of the stack
 							do{
 								if(find(addrStack.begin(),addrStack.end(),tmpTX.addrID) != addrStack.end()){ //find whether address exists in address stack
 									cnt++;
-//									cout << "Address Matched. Count = " << cnt << "times." << endl;
+									cout << "Address Matched. Count = " << cnt << "times." << endl;
 								}
-								if(AT[s+1].txID == currentTXID){
-									s++;
-									tmpTX = AT[s];
+								it2++;
+								if(it2->txID == currentTXID){
+									tmpTX = *it2;
 								}else{
 									break;
 								}
 							}while(tmpTX.txID == currentTXID);
 
 							if(cnt != 0){  //if atleast one address matches, all these txin addresses are actually owned by the current user
-								for(long int k = txInStartPos; k <= s;k++){
-//									cout << "Giving all address ids userid " << current_user_id << " from txin pos=" << txInStartPos << endl;
-									tmpTX = AT[k];
+								list<addrTXrep>::iterator k;
+								cout << "Giving non determined address ids userid " << current_user_id << endl ;//<< " from txin pos=" << txInStartPos  << endl;
+								for(k = txInStartPos;k !=it2 ;){
+									tmpTX = *k;
 									//push addresses if already not exists
 									if(find(addrStack.begin(),addrStack.end(),tmpTX.addrID) == addrStack.end()){
-//										cout << "Push input address id = " << tmpTX.addrID << " into addrStack." << endl;
-//										cout << "Address got Current User ID = " << current_user_id << endl;
+										cout << "Push input address id = " << tmpTX.addrID << " into addrStack." << endl;
+										cout << "Address got Current User ID = " << current_user_id << endl;
 										userID[tmpTX.addrID] = current_user_id;
 										GotUserID[tmpTX.addrID] = true;
 										addrStack.push_back(tmpTX.addrID);
+									}else{
+										cout << "This address id already got user id." << endl;
 									}
-									AT[k].r_flag = true;  //make it visited
+									k = AT.erase(k);
+								}
+								if(it == txInStartPos){
+									it = it2;
 								}
 							}
-						}//endif
 					}//endfor
-//					cout << "clearing the address stack(Input addr)." << addrStack.size() <<  endl;
+//					it--; //getting back
+					cout << "clearing the address stack(Input addr)." << addrStack.size() <<  endl;
 					addrStack.clear();//clear the address stack as we have searched the whole file
-				}//endif
+					cout << "current size of the txin list: " << AT.size() << endl;
 			}
 
 
-		while(txOutFileName >> txInID >> addrID >> value){
-			addrTXrep tmp;
-			tmp.txID = txInID;
-			tmp.addrID = addrID;
-			tmp.value = value;
-			tmp.r_flag = false;
-			break;
-			ATT.push_back(tmp);
-		}
-
-		long int txOutSize = ATT.size();
-		// for output addresses in the output txs after consecutive input txs
-		for(long int r = 0; r < txOutSize;r++){
-			addrTXrep tmpTX = AT[r];
-			if(GotUserID[tmpTX.addrID] == false){  					// if user id for this output address not yet determined
-//				long int currentTXID = tmpTX.txID;
-				////????? determine whether change address or not , if change address don't
-				current_user_id++;	//increase the user_id				cout << "Output addrID = " << tmpTX.addrID << " Candidate for new userID. Id incremented to " << current_user_id << endl;
-				userID[tmpTX.addrID] = current_user_id;
-				cout << "New Output address. Received user id " << current_user_id << endl;
-				GotUserID[tmpTX.addrID] = true;
-			}
-			else{
-				cout << "This output address already got user id." << endl;
-			}
-		}
+//		while(txOutFileName >> txInID >> addrID >> value){
+//			addrTXrep tmp;
+//			tmp.txID = txInID;
+//			tmp.addrID = addrID;
+//			tmp.value = value;
+//			tmp.r_flag = false;
+//			break;
+//			ATT.push_back(tmp);
+//		}
+//
+//		long int txOutSize = ATT.size();
+//		// for output addresses in the output txs after consecutive input txs
+//		for(long int r = 0; r < txOutSize;r++){
+//			addrTXrep tmpTX = AT[r];
+//			if(GotUserID[tmpTX.addrID] == false){  					// if user id for this output address not yet determined
+////				long int currentTXID = tmpTX.txID;
+//				////????? determine whether change address or not , if change address don't
+//				current_user_id++;	//increase the user_id				cout << "Output addrID = " << tmpTX.addrID << " Candidate for new userID. Id incremented to " << current_user_id << endl;
+//				userID[tmpTX.addrID] = current_user_id;
+//				cout << "New Output address. Received user id " << current_user_id << endl;
+//				GotUserID[tmpTX.addrID] = true;
+//			}
+//			else{
+//				cout << "This output address already got user id." << endl;
+//			}
+//		}
 
 		ofstream useridOutFileName;
 		useridOutFileName.open(string(MAC_PATH+"userid2.txt").c_str(),ofstream::out);

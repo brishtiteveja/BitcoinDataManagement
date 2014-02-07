@@ -16,11 +16,10 @@ private:
 		long int addrID;
 		long int txID;
 		long int value;
-		bool r_flag;
 	};
 	vector<bool> GotUserID;
 	mlili userID;
-	vector<addrTXrep> AT;//input
+	list<addrTXrep> AT;//input
 	vector<addrTXrep> ATT;//output
 
 public:

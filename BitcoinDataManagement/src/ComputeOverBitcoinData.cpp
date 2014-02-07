@@ -7,24 +7,25 @@
 #include "ComputeOverBitcoinData.h"
 
 
-void compute(){
+void ComputeOverBitcoinData::compute(){
 	ifstream txFileName;
-	txFileName.open(string(MAC_BITCOIN_PATH + "bitcoin dataset main/tx.txt").c_str(),ifstream::in);
+	txFileName.open(string(BITCOINPROCESSEDPATH + "tx.txt").c_str(),ifstream::in);
 	ifstream txInFileName;
-	txInFileName.open(string(MAC_BITCOIN_PATH + "bitcoin dataset main/txin.txt").c_str(),ifstream::in);
+	txInFileName.open(string(BITCOINPROCESSEDPATH + "txin.txt").c_str(),ifstream::in);
 	ifstream txOutFileName;
-	txOutFileName.open(string(MAC_BITCOIN_PATH + "bitcoin dataset main/txout.txt").c_str(),ifstream::in);
+	txOutFileName.open(string(BITCOINPROCESSEDPATH + "txoutn.txt").c_str(),ifstream::in);
+	ifstream txutimeFileName;
+	txutimeFileName.open(string(BITCOINPROCESSEDPATH + "txtimeunix.txt").c_str(),ifstream::in);
 
 	ofstream balanceFileName;
-	balanceFileName.open(string(MAC_PATH + "/balances.txt").c_str(),ofstream::out);
+	balanceFileName.open(string(MAC_PATH + "computed/balances.txt").c_str(),ofstream::out);
 	ofstream degreeFileName;
-	degreeFileName.open(string(MAC_PATH + "degree.txt").c_str(),ofstream::out);
+	degreeFileName.open(string(MAC_PATH + "computed/degree.txt").c_str(),ofstream::out);
+
 
 	mlili addrBalanceMap;
 	mlili inDegMap;
 	mlili outDegMap;
-
-	//taking input from txInFileName
 
 
 	//taking output from txOutFileName
@@ -34,14 +35,12 @@ void compute(){
 //	long int stopper = 0;
 	bool MovePastFlagIn = false;
 	bool MovePastFlagOut = false;
-	long int tmpTxInID, tmpInAddrID, tmpInValue;
-	long int tmpTxOutID, tmpOutAddrID, tmpOutValue;
 	while(txFileName >> txID >> blockID >> n_inputs >> n_outputs && !txFileName.eof()){
 //		stopper++;
 		cout << "tx = " << txID << " " << blockID << " " << " " << n_inputs << " " << n_outputs << endl;
 		long int txInID,txOutID;
 		long int addrID;
-		long int value;
+		double value;
 
 
 		int cnt = 0;
@@ -67,10 +66,6 @@ void compute(){
 				if(txInID > txID){
 					//need to move a line back
 					MovePastFlagIn = true;
-					tmpTxInID = txInID;
-					tmpInAddrID = addrID;
-					tmpInValue = value;
-
 					break;
 				}
 			}
@@ -99,9 +94,6 @@ void compute(){
 				if(txOutID > txID){
 					//need to move a line back
 					MovePastFlagOut = true;
-					tmpTxOutID = txOutID;
-					tmpOutAddrID = addrID;
-					tmpOutValue = value;
 					break;
 				}
 			}

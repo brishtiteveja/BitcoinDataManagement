@@ -9,6 +9,13 @@
 #define COMPUTEOVERBITCOINDATA_H_
 
 #include "CommonHeaders.h"
-void compute();
+#include "FormatFile.h"
+
+class ComputeOverBitcoinData{
+private:
+	FormatFile format;
+public:
+	void compute();
+};
 
 #endif /* COMPUTEOVERBITCOINDATA_H_ */

@@ -1,50 +1,7 @@
-#include "CommonHeaders.h"
-
-
-
-string numToString(int num){
-	ostringstream convert;
-	convert << num;
-
-	//hello
-	string res = convert.str();
-	return res;
-}
-
-int stringToInt(string s){
-	return atoi(s.c_str());
-}
-
-double stringToDouble(string s){
-	return atof(s.c_str());
-}
-
-
-//2013-12-25 08:59:39
-time_t convertToEpochtime(string realTime){
-	struct tm timeInfo;
-	timeInfo.tm_year = atoi(realTime.substr(0,4).c_str()) - 1900;
-	timeInfo.tm_mon = atoi(realTime.substr(5,2).c_str()) - 1;
-	timeInfo.tm_mday = atoi(realTime.substr(8,2).c_str());
-	timeInfo.tm_hour = atoi(realTime.substr(11,2).c_str());
-	timeInfo.tm_min = atoi(realTime.substr(14,2).c_str());
-	timeInfo.tm_sec = atoi(realTime.substr(17,2).c_str());
-	//cout << timeInfo.tm_year << " " << timeInfo.tm_mon << " " << timeInfo.tm_mday << " " << timeInfo.tm_hour << " " << timeInfo.tm_min << " " << timeInfo.tm_sec << endl;
-	time_t epochTime = mktime(&timeInfo);
-	//cout << epochTime << endl;
-	return epochTime;
-}
-
-struct tm* convertToUnixtime(time_t epochTime){
-	struct tm *t = localtime(&epochTime);
-	t -> tm_year += 1900;
-	t -> tm_mon  += 1;
-	return t;
-}
-
+#include "ExtractFromBlockExplorer.h"
 
 //crashed once in blkID = 219826 , recompute from here
-void runExtractor(){
+void ExtractFromBlockExplorer::runExtractor(){
 	string outfileName;
 	int blockIDFrom = 265000;
 	int blockIDTo = 265002;
@@ -182,7 +139,7 @@ void runExtractor(){
 			//For Mac
 			string infileName(string(MAC_BLOCK_PATH + "Block").c_str());
 
-			string tmp(numToString(blockID));
+			string tmp(format.numToString(blockID));
 
 			infileName.append(tmp);
 			infileName.append(".html");
@@ -373,7 +330,7 @@ void runExtractor(){
 						inAddressIDs.push_back(addr_id);
 
 						//------> write to txin.txt
-						txinFileName << txID << "\t" << addr_id << "\t" << (-1)*stringToDouble(coinGenBTC.c_str()) << endl;
+						txinFileName << txID << "\t" << addr_id << "\t" << (-1)* format.stringToDouble(coinGenBTC.c_str()) << endl;
 
 						// Decrease generation balance
 //						double tmpBalance;
