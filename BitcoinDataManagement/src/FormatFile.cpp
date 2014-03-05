@@ -114,3 +114,32 @@ void FormatFile::formatTxOutFile(){
 		}
 
 }
+
+void FormatFile::formatTxTimeFile(){
+	ifstream txTimeUnixFile;
+
+	txTimeUnixFile.open(string(BITCOINPROCESSEDPATH + "txtimeunix.txt").c_str(),ifstream::in);
+
+	ofstream txTimeUnixOutFile;
+	txTimeUnixOutFile.open(string(BITCOINPROCESSEDPATH + "txtimeunix_n.txt").c_str(),ofstream::out);
+
+	int cnt = 0;
+	if(txTimeUnixFile.is_open()){
+			string line;
+			while(getline(txTimeUnixFile,line)){
+				cnt++;
+//				if(cnt == 30)
+//					break;
+				istringstream iss(line);
+				string lineID, txID, unixtime;
+
+				while(iss >> lineID >> txID >> unixtime){
+					cout << lineID << "\t" << txID << "\t" << unixtime << endl;
+					txTimeUnixOutFile << txID << "\t" << unixtime << endl;
+				}
+			}
+	}
+	txTimeUnixFile.close();
+	txTimeUnixOutFile.close();
+
+}

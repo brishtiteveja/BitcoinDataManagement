@@ -33,7 +33,7 @@ string MAC_BLOCK_PATH ="D:/Users/ananda/Downloads/Bitcoin/Blocks/";
 //Mac
 //string BITCOINPROCESSEDPATH = "";
 //Windows
-string BITCOINPROCESSEDPATH = "D:/Users/ananda/Downloads/Bitcoin/BitcoinDataNewNew/";
+string BITCOINPROCESSEDPATH = "D:/Users/ananda/Downloads/Bitcoin/BitcoinData/";
 
 
 int main(){
@@ -49,9 +49,10 @@ int main(){
 //	ComputeOverBitcoinData degBalance;
 //	degBalance.compute();
 
-//	FormatFile f;
+	FormatFile f;
 //	f.formatAddressFile();
 //	f.formatTxOutFile();
+	f.formatTxTimeFile();
 
 //	IdentifyBitcoinUserEfficient userContractor;
 //	userContractor.identifyBitcoinUser();
@@ -60,8 +61,8 @@ int main(){
 //	IdentifyBitcoinUserNew userContractor;
 //	userContractor.IdentifyBTCUser();
 
-	ComputeTemporalBalance b;
-	b.compTemporalBalance();
+//	ComputeTemporalBalance b;
+//	b.compTemporalBalance();
 }
 
 
